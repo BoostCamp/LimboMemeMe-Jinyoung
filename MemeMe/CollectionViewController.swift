@@ -12,6 +12,8 @@ import UIKit
 class CollectionViewController: UICollectionViewController {
     var memes = [Meme]()
     
+    // MARK: - Life Cycle
+    
     override func viewWillAppear(_ animated: Bool) {
         // 1. appDelegate의 meme를 저장한다.
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -21,20 +23,24 @@ class CollectionViewController: UICollectionViewController {
         self.collectionView?.reloadData()
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width / 4, height: view.frame.width / 4)
-    }
-    
+    // MARK: - Collection view data source
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return memes.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memeCollectionCell", for: indexPath) as! CollectionViewCell
-
+        
         cell.memeImageView?.image = memes[indexPath.row].memedImage
         cell.memeImageView?.contentMode = .scaleAspectFit
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        detailController.meme = memes[indexPath.row]
+        navigationController!.pushViewController(detailController, animated: true)
     }
 
 }

@@ -11,6 +11,7 @@ import UIKit
 
 class EditViewTextFieldDelegate : NSObject, UITextFieldDelegate {
 
+    // 텍스트 필드 편집 시작 시, 초기화
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.text = ""
     }

@@ -28,7 +28,9 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: CGFloat(40.0))!,
         NSStrokeWidthAttributeName: 5.0
     ]
+
     
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         self.topTextField.delegate = textCotroller
@@ -56,14 +58,15 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
-
+    
+    
+    // MARK: - Keyborad에 따른 View 조절
     
     func keyboardWillShow(_ notification:Notification) {
 
         if view.frame.origin.y == 0 {
             view.frame.origin.y -= getKeyboardHeight(notification)
         }
-        
     }
     
     func keyboardWillHide(_ notification:Notification) {
@@ -85,8 +88,10 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
-
     
+
+    // MARK: - Pick Image & Save Image
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         dismiss(animated: true, completion: {
             if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
@@ -124,6 +129,8 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     
+    // MARK: Actions
+    
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
@@ -149,7 +156,6 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 self.save()
                 self.dismiss(animated: true, completion: nil)
             } else {
-                
                 print(error.debugDescription)
             }
         }

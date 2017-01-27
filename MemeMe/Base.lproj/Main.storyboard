@@ -190,6 +190,33 @@
             </objects>
             <point key="canvasLocation" x="967" y="705"/>
         </scene>
+        <!--Meme Detail-->
+        <scene sceneID="OeC-R7-tLn">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y03-fl-jys" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="DetailViewController" title="Meme Detail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="To2-bo-rmd" customClass="DetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XhS-vc-aja"/>
+                        <viewControllerLayoutGuide type="bottom" id="Tix-jZ-hyi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qWT-9d-Vxr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2GJ-7g-Ae0">
+                                <rect key="frame" x="0.0" y="69" width="375" height="546"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="memeDetailImageView" destination="2GJ-7g-Ae0" id="f1m-EV-fTI"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2004" y="705"/>
+        </scene>
         <!--Collection Navigation Controller-->
         <scene sceneID="Vhd-T3-WAz">
             <objects>

@@ -12,12 +12,16 @@ import UIKit
 class TableViewController: UITableViewController {
     var memes = [Meme]()
     
+    // MARK: - Life Cycle
+    
     override func viewWillAppear(_ animated: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         memes = appDelegate.memes
         self.tableView.reloadData()
     }
-    
+
+    // MARK: - Table view data source
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
     }
@@ -28,6 +32,12 @@ class TableViewController: UITableViewController {
         cell.memeTableImageView?.image = memes[indexPath.row].memedImage! as UIImage
         cell.memeTableTitle?.text = "\(memes[indexPath.row].topText!)...\(memes[indexPath.row].bottomText!)"
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        detailController.meme = memes[indexPath.row]
+        navigationController!.pushViewController(detailController, animated: true)
     }
     
 

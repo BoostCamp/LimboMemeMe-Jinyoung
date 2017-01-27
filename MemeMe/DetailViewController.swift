@@ -9,5 +9,17 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    
+    var meme : Meme?
+    @IBOutlet weak var memeDetailImageView: UIImageView!
+    
+    // MARK: - Life Cycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let meme = meme {
+            memeDetailImageView.image = meme.memedImage
+        }
+    }
+    
+    
 }
