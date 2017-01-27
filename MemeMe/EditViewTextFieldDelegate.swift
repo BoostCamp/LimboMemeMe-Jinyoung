@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TextFieldDelegate : NSObject, UITextFieldDelegate {
+class EditViewTextFieldDelegate : NSObject, UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.text = ""

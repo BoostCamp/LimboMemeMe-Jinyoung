@@ -8,18 +8,20 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var albumButton: UIBarButtonItem!
-    @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
-    @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var albumButton: UIBarButtonItem!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
+
     
-    
-    let textCotroller = TextFieldDelegate()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let textCotroller = EditViewTextFieldDelegate()
     let memeTextAttributes:[String:Any] = [
         NSStrokeColorAttributeName: UIColor.black,
         NSForegroundColorAttributeName: UIColor.white,
@@ -27,15 +29,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSStrokeWidthAttributeName: 5.0
     ]
     
-    struct Meme {
-        var topText : String?
-        var bottomText : String?
-        var originalImage : UIImage?
-        var memedImage : UIImage?
-    }
-    
-    var memeSaver : [Meme]?
-    
+
     override func viewDidLoad() {
         self.topTextField.delegate = textCotroller
         self.bottomTextField.delegate = textCotroller
@@ -109,21 +103,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func generateMemedImage() -> UIImage {
-        self.toolbar.isHidden = true
+        
+        // 네비게이션, 툴바를 제외한 뷰 이미지를 저장한다.
+        self.navigationBar.isHidden = true
+        self.toolBar.isHidden = true
         
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        self.toolbar.isHidden = false
-        
+        self.navigationBar.isHidden = false
+        self.toolBar.isHidden = false
         return memedImage
     }
     
     func save() {
          let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage:imageView.image!, memedImage: generateMemedImage())
-        memeSaver = [meme]
+         appDelegate.memes.append(meme)
     }
     
     
@@ -141,20 +138,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(pickerController, animated: true, completion: nil)
     }
 
-    @IBAction func shareImage(_ sender: Any) {
-
+    
+    @IBAction func shareButtonClicked(_ sender: Any) {
         let activityController = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil)
         self.present(activityController, animated: true, completion: nil)
         
         activityController.completionWithItemsHandler = {(activityImage, completed, object, error) in
             if completed {
+                // 이미지를 저장 후, 편집창을 닫는다.
                 self.save()
-                print(self.memeSaver!)
+                self.dismiss(animated: true, completion: nil)
             } else {
+                
                 print(error.debugDescription)
             }
         }
-        
+    }
+    
+    @IBAction func cancelButtonClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

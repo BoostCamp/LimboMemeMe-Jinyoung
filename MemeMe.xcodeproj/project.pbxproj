@@ -7,19 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		43538CCE1E3269890010C39E /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43538CCD1E3269890010C39E /* TextFieldDelegate.swift */; };
+		43538CCE1E3269890010C39E /* EditViewTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43538CCD1E3269890010C39E /* EditViewTextFieldDelegate.swift */; };
+		436550511E3B198000CD9A63 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436550501E3B198000CD9A63 /* CollectionViewCell.swift */; };
+		43A7ECCF1E39EBC40031A2FF /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A7ECCE1E39EBC40031A2FF /* Meme.swift */; };
+		43A7ECD11E3A01510031A2FF /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A7ECD01E3A01510031A2FF /* TableViewController.swift */; };
+		43A7ECD31E3A01600031A2FF /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A7ECD21E3A01600031A2FF /* CollectionViewController.swift */; };
 		43F88BCB1E323EB10095A5BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F88BCA1E323EB10095A5BA /* AppDelegate.swift */; };
-		43F88BCD1E323EB10095A5BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F88BCC1E323EB10095A5BA /* ViewController.swift */; };
+		43F88BCD1E323EB10095A5BA /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F88BCC1E323EB10095A5BA /* EditViewController.swift */; };
 		43F88BD01E323EB10095A5BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43F88BCE1E323EB10095A5BA /* Main.storyboard */; };
 		43F88BD21E323EB10095A5BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43F88BD11E323EB10095A5BA /* Assets.xcassets */; };
 		43F88BD51E323EB10095A5BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43F88BD31E323EB10095A5BA /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		43538CCD1E3269890010C39E /* TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
+		43538CCD1E3269890010C39E /* EditViewTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewTextFieldDelegate.swift; sourceTree = "<group>"; };
+		436550501E3B198000CD9A63 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		43A7ECCE1E39EBC40031A2FF /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
+		43A7ECD01E3A01510031A2FF /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		43A7ECD21E3A01600031A2FF /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		43F88BC71E323EB10095A5BA /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43F88BCA1E323EB10095A5BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		43F88BCC1E323EB10095A5BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		43F88BCC1E323EB10095A5BA /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		43F88BCF1E323EB10095A5BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		43F88BD11E323EB10095A5BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = MemeMe/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		43F88BD41E323EB10095A5BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,12 +64,16 @@
 		43F88BC91E323EB10095A5BA /* MemeMe */ = {
 			isa = PBXGroup;
 			children = (
+				43A7ECCE1E39EBC40031A2FF /* Meme.swift */,
+				436550501E3B198000CD9A63 /* CollectionViewCell.swift */,
+				43A7ECD01E3A01510031A2FF /* TableViewController.swift */,
+				43A7ECD21E3A01600031A2FF /* CollectionViewController.swift */,
 				43F88BCA1E323EB10095A5BA /* AppDelegate.swift */,
-				43538CCD1E3269890010C39E /* TextFieldDelegate.swift */,
-				43F88BCC1E323EB10095A5BA /* ViewController.swift */,
+				43538CCD1E3269890010C39E /* EditViewTextFieldDelegate.swift */,
+				43F88BCC1E323EB10095A5BA /* EditViewController.swift */,
 				43F88BCE1E323EB10095A5BA /* Main.storyboard */,
-				43F88BD11E323EB10095A5BA /* Assets.xcassets */,
 				43F88BD31E323EB10095A5BA /* LaunchScreen.storyboard */,
+				43F88BD11E323EB10095A5BA /* Assets.xcassets */,
 				43F88BD61E323EB10095A5BA /* Info.plist */,
 			);
 			path = MemeMe;
@@ -140,9 +152,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43F88BCD1E323EB10095A5BA /* ViewController.swift in Sources */,
+				43A7ECD31E3A01600031A2FF /* CollectionViewController.swift in Sources */,
+				43F88BCD1E323EB10095A5BA /* EditViewController.swift in Sources */,
+				43A7ECCF1E39EBC40031A2FF /* Meme.swift in Sources */,
+				436550511E3B198000CD9A63 /* CollectionViewCell.swift in Sources */,
 				43F88BCB1E323EB10095A5BA /* AppDelegate.swift in Sources */,
-				43538CCE1E3269890010C39E /* TextFieldDelegate.swift in Sources */,
+				43A7ECD11E3A01510031A2FF /* TableViewController.swift in Sources */,
+				43538CCE1E3269890010C39E /* EditViewTextFieldDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
