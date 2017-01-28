@@ -32,6 +32,7 @@ Meme는  네 가지 화면으로 이루어져 있습니다.
   - 완성된 화면을 공유할 수 있습니다.
 
     <img src="/img/meme_create.png" width="250"></img>
+    <img src="/img/meme_create_share.png" width="250"></img>
     <br /><br />
 
 
