@@ -56,6 +56,6 @@ Meme의 텍스트를 편집하는 기능(텍스트이동, 텍스트추가)을 �
 
 
 ### 4. 시연영상
-<img src="/img/Meme.mp4"></img>
+<img url="/img/Meme.mp4"></img>
 
 
