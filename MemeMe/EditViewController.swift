@@ -20,7 +20,6 @@ class EditViewController: UIViewController {
     // textFieldContainer : 텍스트의 이동과 변경을 위해 meme의 텍스트 OR 사용자가 생성할 텍스트를 담는다.
     var textFieldContainer = UITextField()
     
-    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var editToolBar: UIToolbar!
     
@@ -51,11 +50,13 @@ class EditViewController: UIViewController {
             // 3. 텍스트를 위치시킨다.
             textFieldInit()
         }
+        subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         // 화면이 사라지면, 기존의 tabBar를 다시 나타낸다.
         self.tabBarController?.tabBar.isHidden = false
+        unsubscribeFromKeyboardNotifications()
     }
     
     
@@ -92,6 +93,7 @@ class EditViewController: UIViewController {
         self.textFieldContainer.isUserInteractionEnabled = true
     }
     
+    
     // userDragged : 텍스트 컨테이너의 위치를 사용자의 드래그 위치로 변경
     func userDragged(gesture: UIPanGestureRecognizer){
         let loc = gesture.location(in: self.view)
@@ -106,7 +108,6 @@ class EditViewController: UIViewController {
                 count += 1
             }
         }
-        print(count)
         return count
     }
     
@@ -144,13 +145,42 @@ class EditViewController: UIViewController {
         
     }
     
+    
+    // MARK: - Keyborad에 따른 View 조절
+    
+    func keyboardWillShow(_ notification:Notification) {
+        if view.frame.origin.y == 0 && appDelegate.textFieldPointY > self.view.frame.midY {
+            view.frame.origin.y -= getKeyboardHeight(notification)
+        }
+    }
+    
+    func keyboardWillHide(_ notification:Notification) {
+        view.frame.origin.y = 0
+    }
+    
+    func getKeyboardHeight(_ notification:Notification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboradSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboradSize.cgRectValue.height
+    }
+    
+    func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
 
     // MARK: - Action
     
     // addTextCilcked : 텍스트 필드를 추가한다.
     @IBAction func addTextCilcked(_ sender: Any) {
         
-        // 0. text는 총 10개 미만으로 생성한다.
+        // 0-1. text는 총 10개 미만으로 생성한다.
         if countOfTextFieldInView(superView: self.view) < 10 {
             
             // 1. X좌표, Y좌표의 중앙에 텍스트를 생성한다.
@@ -168,9 +198,18 @@ class EditViewController: UIViewController {
         
             // 3. 텍스트에서 터치이벤트가 발생했을 때, 사용자의 드래그에 반응할 수 있도록 등록한다.
             addTextField.addTarget(self, action: #selector(EditViewController.registDragGesture(sender:)), for: UIControlEvents.allTouchEvents)
+            
+            // 4. 텍스트를 뷰에 나타낸다.
             self.view.addSubview(addTextField)
-        } else {
+        }
+            
+        // 0-2. text가 10개 이상이면, 추가 버튼을 비활성화하고 경고창을 띄운다.
+        else {
             self.addTextButton.isEnabled = false
+            let alert = UIAlertController(title: "", message: "더 이상 추가할 수 없습니다", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            alert.addAction(cancel)
+            self.present(alert, animated: false, completion: nil)
         }
     }
     

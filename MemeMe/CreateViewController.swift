@@ -19,7 +19,6 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var albumButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
-    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let textCotroller = TextFieldDelegate()
     let memeTextAttributes:[String:Any] = [
@@ -28,7 +27,6 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: CGFloat(40.0))!,
         NSStrokeWidthAttributeName: 5.0
     ]
-    
     
     // MARK: - Life Cycle
     
@@ -49,7 +47,6 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         if self.imageView.image == nil {
             self.shareButton.isEnabled = false
         }
-        
         subscribeToKeyboardNotifications()
         
     }
@@ -61,10 +58,9 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     
     // MARK: - Keyborad에 따른 View 조절
-    
     func keyboardWillShow(_ notification:Notification) {
-        
-        if view.frame.origin.y == 0 {
+        // 뷰가 올라가지 않았고, 터치한 textField의 Y좌표가 중앙보다 클 경우에 뷰의 위치를 조정한다.
+        if view.frame.origin.y == 0 && appDelegate.textFieldPointY > self.view.frame.midY {
             view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
