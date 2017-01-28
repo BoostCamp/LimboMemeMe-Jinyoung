@@ -2,8 +2,6 @@
 
 Meme는 Udacity 강의 "[UIKit Fundamentals](https://classroom.udacity.com/courses/ud788/lessons/3499758725/concepts/36175187290923#)" 에서 제공하는 코드를 기반으로 만들었습니다.
 
-
-Meme의 영상은 [여기]()에서 보실 수 있습니다.
 <br />
 
 ### 1. Meme 개요
@@ -54,4 +52,8 @@ Meme의 텍스트를 편집하는 기능(텍스트이동, 텍스트추가)을 �
 
   - 완성된 Meme를 저장하고, 공유할 수 있습니다. <br />
     <img src="/img/share.png" width="250"></img>
-    <br />
+    <br /><br />
+
+
+### 4. 시연영상
+    ![](/img/Meme.mp4)
