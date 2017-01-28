@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var memes = [Meme]()
+    
+    // textFieldPointY : 키보드와 텍스트 필드 좌표 따른 뷰의 위치조절
     var textFieldPointY : CGFloat = 0.0
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

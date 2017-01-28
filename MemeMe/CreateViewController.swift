@@ -38,17 +38,23 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // 1. 카메라기능의 존재 유무에 따라 카메라 버튼의 활성화 여부를 결정한다.
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        
+        // 2. 텍스트 필드의 속성을 설정한다.
         self.topTextField.defaultTextAttributes = memeTextAttributes
         self.bottomTextField.defaultTextAttributes = memeTextAttributes
         self.topTextField.textAlignment = .center
         self.bottomTextField.textAlignment = .center
         
+        // 3. 이미지가 없을 때, 공유버튼을 비활성화한다.
         if self.imageView.image == nil {
             self.shareButton.isEnabled = false
         }
-        subscribeToKeyboardNotifications()
         
+        // 4. 키보드의 등장과 사라짐을 인지한다.
+        subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -90,8 +96,10 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         dismiss(animated: true, completion: {
+            // 1. 이미지가 선택되면, 이미지뷰에 나타낸다.
             if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
                 self.imageView.image = image
+                // 2. 이미지가 나타나면, 공유버튼을 활성화한다.
                 if self.imageView.image != nil {
                     self.shareButton.isEnabled = true
                 }
@@ -103,9 +111,8 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         dismiss(animated: true, completion: nil)
     }
     
+    // generateMemedImage : 네비게이션, 툴바를 제외한 뷰 이미지를 저장한다.
     func generateMemedImage() -> UIImage {
-        
-        // 네비게이션, 툴바를 제외한 뷰 이미지를 저장한다.
         self.navigationBar.isHidden = true
         self.toolBar.isHidden = true
         
@@ -119,6 +126,7 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         return memedImage
     }
     
+    // save : 텍스트필드의 텍스트, 위치와 이미지를 meme 배열에 저장한다.
     func save() {
         let meme = Meme.init(textArray:[(topTextField.text!, topTextField.frame), (bottomTextField.text!, bottomTextField.frame)],
             memedImage: generateMemedImage(),
@@ -130,6 +138,7 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     // MARK: Actions
     
+    // pickAnImageFromCamera : 카메라에서 이미지를 가져온다.
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
@@ -137,6 +146,7 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         present(pickerController, animated: true, completion: nil)
     }
     
+    // pickAnImageFromAlbum : 앨범에서 이미지를 가져온다.
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
@@ -146,20 +156,21 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     
     @IBAction func shareButtonClicked(_ sender: Any) {
+        // 1. 엑티비티 컨트롤러를 등장시킨다.
         let activityController = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil)
         self.present(activityController, animated: true, completion: nil)
         
+        // 2. 완료되면, 이미지를 저장하고 편집창을 닫는다.
         activityController.completionWithItemsHandler = {(activityImage, completed, object, error) in
             if completed {
-                // 이미지를 저장 후, 편집창을 닫는다.
                 self.save()
                 self.dismiss(animated: true, completion: nil)
             } else {
-                print(error.debugDescription)
             }
         }
     }
     
+    // cancelButtonClicked : 취소버튼을 누르면, 현재 뷰를 닫는다.
     @IBAction func cancelButtonClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }

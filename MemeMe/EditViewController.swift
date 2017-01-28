@@ -50,6 +50,7 @@ class EditViewController: UIViewController {
             // 3. 텍스트를 위치시킨다.
             textFieldInit()
         }
+        // 4. 키보드의 등장과 사라짐을 인지한다.
         subscribeToKeyboardNotifications()
     }
     
@@ -88,19 +89,19 @@ class EditViewController: UIViewController {
         // 2. 드래그를 할 때, 수행할 함수를 등록한다.
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(userDragged(gesture:)))
         
-        // 3. 텍스트 컨테이너
+        // 3. 텍스트 컨테이너를 드래그이벤트에 등록하고, 사용자 드래그를 활성화한다.
         self.textFieldContainer.addGestureRecognizer(gesture)
         self.textFieldContainer.isUserInteractionEnabled = true
     }
     
     
-    // userDragged : 텍스트 컨테이너의 위치를 사용자의 드래그 위치로 변경
+    // userDragged : 텍스트 컨테이너의 위치를 사용자의 드래그 위치로 변경한다.
     func userDragged(gesture: UIPanGestureRecognizer){
         let loc = gesture.location(in: self.view)
         self.textFieldContainer.center = loc
     }
     
-    // countOfTextFieldInView : view 안에 textField를 개수 반환
+    // countOfTextFieldInView : view 안에 textField를 개수 반환한다.
     func countOfTextFieldInView(superView: UIView)-> Int{
         var count = 0
         for textView in superView.subviews{
@@ -111,9 +112,8 @@ class EditViewController: UIViewController {
         return count
     }
     
-    
+    // generateMemedImage : 네비게이션, 툴바를 제외한 뷰 이미지를 저장한다.
     func generateMemedImage() -> UIImage {
-        // 네비게이션, 툴바를 제외한 뷰 이미지를 저장한다.
         self.navigationController?.navigationBar.isHidden = true
         self.editToolBar.isHidden = true
         
@@ -127,9 +127,9 @@ class EditViewController: UIViewController {
         return memedImage
     }
     
+    // save : 텍스트필드의 텍스트, 위치와 이미지를 meme 배열에 저장한다.
     func save() {
         if let meme = self.meme {
-            
             meme.textArray = []
             for textView in self.view.subviews{
                 if (textView is UITextField){
@@ -140,10 +140,10 @@ class EditViewController: UIViewController {
             }
             meme.memedImage = generateMemedImage()
             appDelegate.memes[memeIndex!] = self.meme!
-            print(appDelegate.memes[memeIndex!])
         }
         
     }
+    
     
     
     // MARK: - Keyborad에 따른 View 조절
@@ -173,6 +173,7 @@ class EditViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
+    
     
 
     // MARK: - Action
@@ -219,12 +220,13 @@ class EditViewController: UIViewController {
     }
 
     @IBAction func shareButtonClicked(_ sender: Any) {
+        // 1. 엑티비티 컨트롤러를 등장시킨다.
         let activityController = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil)
         self.present(activityController, animated: true, completion: nil)
         
+        // 2. 완료되면, 이미지를 저장하고 편집창을 닫는다.
         activityController.completionWithItemsHandler = {(activityImage, completed, object, error) in
             if completed {
-                // 이미지를 저장 후, 편집창을 닫는다.
                 self.save()
                 self.dismiss(animated: true, completion: nil)
             } else {

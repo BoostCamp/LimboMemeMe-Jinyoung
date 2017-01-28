@@ -12,6 +12,7 @@ import UIKit
 class TextFieldDelegate : NSObject, UITextFieldDelegate {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
+    // 현재 수정중인 textField의 Y좌표 저장
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         appDelegate.textFieldPointY = textField.frame.midY
         return true
