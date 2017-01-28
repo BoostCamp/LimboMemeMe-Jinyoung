@@ -9,9 +9,18 @@
 import Foundation
 import UIKit
 
-struct Meme {
-    var topText : String?
-    var bottomText : String?
-    var originalImage : UIImage?
+class Meme {
+    // textArray : UITextField.text, UITextField.frame를 튜블로 묶어 저장한다.
+    var textArray : [(String, CGRect)] = []
     var memedImage : UIImage?
+    var originalImage : UIImage?
+    var originalImagePoint : CGRect?
+    
+    init(textArray: [(String, CGRect)], memedImage : UIImage, originalImage : UIImage, originalImagePoint : CGRect) {
+        self.textArray = textArray
+        self.memedImage = memedImage
+        self.originalImage = originalImage
+        self.originalImagePoint = originalImagePoint
+    }
 }
+

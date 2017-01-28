@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  PickerImage
+//  MemeMe
 //
 //  Created by 장진영 on 2017. 1. 20..
 //  Copyright © 2017년 Jinyoung. All rights reserved.

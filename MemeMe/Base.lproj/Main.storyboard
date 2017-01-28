@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="e9S-kf-da3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="e9S-kf-da3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -93,10 +93,10 @@
             </objects>
             <point key="canvasLocation" x="967" y="-28"/>
         </scene>
-        <!--Edit View Controller-->
+        <!--Create View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Edit View Controller" id="BYZ-38-t0r" customClass="EditViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Create View Controller" id="BYZ-38-t0r" customClass="CreateViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -188,13 +188,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="967" y="705"/>
+            <point key="canvasLocation" x="965.60000000000002" y="704.79760119940033"/>
         </scene>
-        <!--Meme Detail-->
+        <!--Edit-->
         <scene sceneID="OeC-R7-tLn">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y03-fl-jys" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="DetailViewController" title="Meme Detail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="To2-bo-rmd" customClass="DetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditViewController" title="Edit" useStoryboardIdentifierAsRestorationIdentifier="YES" id="To2-bo-rmd" customClass="EditViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XhS-vc-aja"/>
                         <viewControllerLayoutGuide type="bottom" id="Tix-jZ-hyi"/>
@@ -203,19 +202,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2GJ-7g-Ae0">
-                                <rect key="frame" x="0.0" y="69" width="375" height="546"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shW-Ab-J8U">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem image="text-add-box" id="dww-zb-lQk">
+                                        <connections>
+                                            <action selector="addTextCilcked:" destination="To2-bo-rmd" id="pmQ-EW-UrK"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="gsf-zF-QU3"/>
+                                    <barButtonItem style="plain" systemItem="save" id="S7h-0K-Sg2">
+                                        <connections>
+                                            <action selector="saveButtonClicked:" destination="To2-bo-rmd" id="ubz-yl-hc7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="I1O-uh-xTm"/>
+                                    <barButtonItem style="plain" systemItem="action" id="W5F-5r-CIs">
+                                        <connections>
+                                            <action selector="shareButtonClicked:" destination="To2-bo-rmd" id="ZsP-b8-zph"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qCU-Id-aTj">
+                                <rect key="frame" x="0.0" y="20" width="375" height="603"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="shW-Ab-J8U" secondAttribute="trailing" id="Dtv-rB-qij"/>
+                            <constraint firstItem="Tix-jZ-hyi" firstAttribute="top" secondItem="shW-Ab-J8U" secondAttribute="bottom" id="Oha-MG-Hxa"/>
+                            <constraint firstItem="qCU-Id-aTj" firstAttribute="top" secondItem="XhS-vc-aja" secondAttribute="bottom" id="QpS-B6-iSf"/>
+                            <constraint firstAttribute="trailing" secondItem="qCU-Id-aTj" secondAttribute="trailing" id="U0H-I0-eWG"/>
+                            <constraint firstItem="qCU-Id-aTj" firstAttribute="leading" secondItem="qWT-9d-Vxr" secondAttribute="leading" id="cOQ-v9-o94"/>
+                            <constraint firstAttribute="bottom" secondItem="qCU-Id-aTj" secondAttribute="bottom" constant="44" id="w2V-tM-FuW"/>
+                            <constraint firstItem="shW-Ab-J8U" firstAttribute="leading" secondItem="qWT-9d-Vxr" secondAttribute="leading" id="zXP-M3-O6P"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="memeDetailImageView" destination="2GJ-7g-Ae0" id="f1m-EV-fTI"/>
+                        <outlet property="addTextButton" destination="dww-zb-lQk" id="J3p-he-QnK"/>
+                        <outlet property="editToolBar" destination="shW-Ab-J8U" id="drq-0D-CMd"/>
+                        <outlet property="imageView" destination="qCU-Id-aTj" id="nea-Iy-l84"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y03-fl-jys" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2004" y="705"/>
+            <point key="canvasLocation" x="1782" y="705"/>
         </scene>
         <!--Collection Navigation Controller-->
         <scene sceneID="Vhd-T3-WAz">
@@ -306,6 +338,7 @@
     <resources>
         <image name="collection-view-icon" width="30" height="30"/>
         <image name="table-view-icon" width="44" height="44"/>
+        <image name="text-add-box" width="44" height="44"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jly-0V-1Dq"/>

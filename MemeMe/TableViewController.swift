@@ -30,14 +30,16 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "memeTableCell", for: indexPath) as! TableViewCell
         cell.memeTableImageView?.contentMode = .scaleAspectFit
         cell.memeTableImageView?.image = memes[indexPath.row].memedImage! as UIImage
-        cell.memeTableTitle?.text = "\(memes[indexPath.row].topText!)...\(memes[indexPath.row].bottomText!)"
+        cell.memeTableTitle?.text = "\(memes[indexPath.row].textArray[0].0)"
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        detailController.meme = memes[indexPath.row]
-        navigationController!.pushViewController(detailController, animated: true)
+        let editController = self.storyboard!.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
+        editController.meme = memes[indexPath.row]
+        editController.memeIndex = indexPath.row
+        navigationController!.pushViewController(editController, animated: true)
     }
     
 
